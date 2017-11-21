@@ -92,7 +92,7 @@
 											</a></td>--%>
 												<td><a href="#"
 												<%--  href="<%=request.getContextPath()%>/usuario/${usuario.id_usuario}/historial/"--%>
-												class="btnbtn-danger btn-xs"> <i
+												class="btnbtn-danger btn-xs" data-toggle="modal" data-target="#myModal"> <i
 													class="fa fa-list"></i> Consultar historial
 											</a></td>
 										</tr>
@@ -109,7 +109,30 @@
               </div>
             </div>
           </section>
-	         
+	         <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
+                        <div style="margin-top:90px"role="document" class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h4 id="exampleModalLabel" class="modal-title">Historial de Compras</h4>
+                              <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+                            </div>
+                            <div class="modal-body">
+                              <p>Aqui se muestran todas sus compras.</p>
+                              <c:if test="${empty historial}">
+								<div style="margin:30px;margin-bottom:80px">Aun no tienes ninguna compra ...</div>
+							 </c:if>
+                              <c:forEach var="usuario" items="${historial}">
+                              	<div>
+                              	</div>
+                              </c:forEach> 
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" data-dismiss="modal" class="btn btn-secondary">Cerrar</button>
+                             <!-- <button type="button" class="btn btn-primary">Save changes</button> --> 
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 	          	<%@ include file="/WEB-INF/views/shared/footer.jsp" %>
 	      </div>
    	  </div>
