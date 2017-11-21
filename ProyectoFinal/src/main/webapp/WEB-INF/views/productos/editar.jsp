@@ -65,41 +65,48 @@
                       <h3 class="h4"></h3>
                     </div>
                     <div class="card-body">
-                      <form:form action="update" method="POST" class="form-horizontal" modelAttribute="producto">
+                      <form:form action="actualizar" method="POST" class="form-horizontal" modelAttribute="producto">
+                       <c:forEach var="producto" items="${productos}">
                         <div class="form-group row">
                           <label class="col-sm-3 form-control-label">Codigo de barras</label>
                           <div class="col-sm-9">
-                            <form:input path="codigo_barras" type="text" class="form-control form-control-success" required/>
+                            <input name="codigo_barras" value="${producto.codigo_barras}" type="text" class="form-control form-control-success" required/>
                           </div>
                         </div>
                         <div class="form-group row">
                           <label class="col-sm-3 form-control-label">Nombre</label>
                           <div class="col-sm-9">
-                          <form:input path="nombre" type="text" class="form-control form-control-success"  required/>
+                          <input name="nombre" type="text" value="${producto.nombre}" class="form-control form-control-success"  required/>
                           </div>
                         </div>
                         <div class="form-group row">
                           <label class="col-sm-3 form-control-label">Precio</label>
                           <div class="col-sm-9">
-                           <form:input path="precio" type="number" class="form-control form-control-success"  required/>
+                           <input name="precio" type="number" value="${producto.precio}" class="form-control form-control-success"  required/>
                           </div>
                         </div>
                         <div class="form-group row">
                           <label class="col-sm-3 form-control-label">Categoria</label>
                           <div class="col-sm-9">
-                            <form:input path="categoria" type="text" class="form-control form-control-success"  required/>
+                            <input name="categoria" type="text" value="${producto.categoria}"class="form-control form-control-success"  required/>
                           </div>
                         </div>
                         <div class="form-group row">
                           <label class="col-sm-3 form-control-label">Peso</label>
                           <div class="col-sm-9">
-                            <form:input path="peso" type="number" class="form-control form-control-success"  required/>
+                            <input name="peso" type="number" value="${producto.peso}" class="form-control form-control-success"  required/>
                            </div>
                         </div>
                         <div class="form-group row">
                           <label class="col-sm-3 form-control-label">Detalle</label>
                           <div class="col-sm-9">
-                            <form:input path="detalle" type="text" class="form-control form-control-success"  required/>
+                            <input name="detalle" type="text" value="${producto.detalle}" class="form-control form-control-success"  required/>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">Estado</label>
+                          <div class="col-sm-9">
+                            <input name="estado" min="0" max="1"type="number" value="${producto.estado}" class="form-control form-control-success"  required/>
                           </div>
                         </div>
                         <div class="form-group row">       
@@ -108,6 +115,7 @@
                             <a href="<%=request.getContextPath()%>/productos"class="btn btn-outline-primary">Cancelar</a>
                           </div>
                         </div>
+                        </c:forEach> 
                       </form:form>
                     </div>
                   </div>

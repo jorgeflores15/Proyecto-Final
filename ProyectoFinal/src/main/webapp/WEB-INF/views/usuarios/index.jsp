@@ -12,7 +12,7 @@
    			<nav class="side-navbar">
 	        	<!-- Sidebar Header-->
 	          	<div class="sidebar-header d-flex align-items-center">
-	            	<div class="avatar"><img src="resources/img/avatar.jpg" alt="..." class="img-fluid rounded-circle"></div>
+	            	<div class="avatar"><img src="<%=request.getContextPath()%>/resources/img/avatar.jpg" alt="..." class="img-fluid rounded-circle"></div>
 	            	<div class="title">
 	              		<h1 class="h4">Jorge Flores</h1>
 	              		<p>Administrador</p>
@@ -20,17 +20,16 @@
 	          	</div>
 	         <!-- Sidebar Navidation Menus--><span class="heading">Principal</span>
 	          	<ul class="list-unstyled">
-	            	<li> <a href="/"><i class="icon-home"></i>Inicio</a></li>
+	            	<li> <a href="<%=request.getContextPath()%>/inicio"><i class="icon-home"></i>Inicio</a></li>
 	            	<li><a href="#dashvariants" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Productos </a>
 	              		<ul id="dashvariants" class="collapse list-unstyled">
-	                		<li><a href="productos">Visualizar los Productos</a></li>
-	                		<li><a href="producto/nuevo">Registrar nuevo Producto</a></li>
+	                		<li><a href="<%=request.getContextPath()%>/productos">Visualizar los Productos</a></li>
+	                		<li><a href="<%=request.getContextPath()%>/producto/nuevo">Registrar nuevo Producto</a></li>
 	              		</ul>
 	            	</li>
 	            	<li class="active"><a href="#dashvariants2" aria-expanded="false" data-toggle="collapse"> <i class="icon-grid"></i>Usuarios</a>
 	              		<ul id="dashvariants2" class="collapse list-unstyled">
-	                		<li class="active"><a href="#">Visualizar Usuarios</a></li>
-			                <li><a href="#">Registrar nuevo Usuario</a></li>
+	                		<li class="active"><a>Visualizar Usuarios</a></li>
 			            </ul>
 			        </li>
 		            <li><a href="#dashvariants3" aria-expanded="false" data-toggle="collapse"> <i class="icon-padnote"></i>Proveedores</a>
@@ -86,15 +85,15 @@
 											<td>${usuario.nombres}</td>
 											<td>${usuario.avatar}</td>
 											<td>${usuario.correo}</td>
-											<td><a
+											<%-- <td><a
 												href="<%=request.getContextPath()%>/usuario/${usuario.id_usuario}/editar"
 												class="btnbtn-info btn-xs"> <i
 													class="fa fa-edit"></i>Edit
-											</a></td>
-												<td><a
-												href="<%=request.getContextPath()%>/producto/${usuario.id_usuario}/borrar/"
+											</a></td>--%>
+												<td><a href="#"
+												<%--  href="<%=request.getContextPath()%>/usuario/${usuario.id_usuario}/historial/"--%>
 												class="btnbtn-danger btn-xs"> <i
-													class="fa fa-trash"></i>  Delete
+													class="fa fa-list"></i> Consultar historial
 											</a></td>
 										</tr>
 									</c:forEach> 

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.flores.proyecto.model.Dato;
 import com.flores.proyecto.model.Producto;
 import com.flores.proyecto.model.Usuario;
 import com.sun.jersey.api.client.Client;
@@ -34,15 +35,15 @@ public class HomeController {
 	
 	@RequestMapping(value = "/inicio", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
 		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		ClientConfig clientConfig = new DefaultClientConfig();
+		clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING,Boolean.TRUE);
+		Client client = Client.create(clientConfig);
+		WebResource webResource = client.resource("https://fast-shop-jrgflores.c9users.io/inicio");
 		
-		String formattedDate = dateFormat.format(date);
+		List<Dato> dato = webResource.get(new GenericType<List<Dato>>(){});
 		
-		
-		model.addAttribute("serverTime", formattedDate );
+		model.addAttribute("datos", dato );
 		
 		return "index";
 	}
@@ -98,7 +99,7 @@ public class HomeController {
 
 		  }
 		//redirect("/productos");
-		String redirectUrl = "/productos";
+		String redirectUrl = "/inicio";
 	    return "redirect:" + redirectUrl;
 	}
 	

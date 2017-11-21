@@ -29,7 +29,7 @@
 	            	</li>
 	            	<li><a href="#dashvariants2" aria-expanded="false" data-toggle="collapse"> <i class="icon-grid"></i>Usuarios</a>
 	              		<ul id="dashvariants2" class="collapse list-unstyled">
-	                		<li><a>Visualizar Usuarios</a></li>
+	                		<li><a href="<%=request.getContextPath()%>/usuarios">Visualizar Usuarios</a></li>
 			            </ul>
 			        </li>
 		            <li><a href="#dashvariants3" aria-expanded="false" data-toggle="collapse"> <i class="icon-padnote"></i>Proveedores</a>
@@ -53,7 +53,7 @@
 			         </div>
 			    </header>
 	 
-	         <section class="dashboard-counts no-padding-bottom">
+	       <section class="dashboard-counts no-padding-bottom" style="min-height:250px">
             <div class="container-fluid">
               <div class="row bg-white has-shadow">
                 <!-- Item -->
@@ -65,49 +65,88 @@
                         <div role="progressbar" style="width: 25%; height: 4px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-violet"></div>
                       </div>
                     </div>
-                    <div class="number"><strong>25</strong></div>
+                    
+                    <div class="number">
+                    	<strong> 
+                    		<c:forEach var="dato" items="${datos}">
+									${dato.usuarios}	
+							</c:forEach> 
+						</strong>
+					</div>
                   </div>
                 </div>
                 <!-- Item -->
                 <div class="col-xl-3 col-sm-6">
                   <div class="item d-flex align-items-center">
                     <div class="icon bg-red"><i class="icon-padnote"></i></div>
-                    <div class="title"><span>Work<br>Orders</span>
+                    <div class="title"><span>Productos<br>Disponibles</span>
                       <div class="progress">
-                        <div role="progressbar" style="width: 25%; height: 4px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-red"></div>
+                        <div role="progressbar" style="width: 50%; height: 4px;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-red"></div>
                       </div>
                     </div>
-                    <div class="number"><strong>70</strong></div>
+                    <div class="number">
+						<strong> 
+                    		<c:forEach var="dato" items="${datos}">
+									${dato.productosD}	
+							</c:forEach> 
+						</strong>
+                    </div>
                   </div>
                 </div>
                 <!-- Item -->
                 <div class="col-xl-3 col-sm-6">
                   <div class="item d-flex align-items-center">
                     <div class="icon bg-green"><i class="icon-bill"></i></div>
-                    <div class="title"><span>New<br>Invoices</span>
+                    <div class="title"><span>Productos<br>Vendidos</span>
                       <div class="progress">
                         <div role="progressbar" style="width: 25%; height: 4px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-green"></div>
                       </div>
                     </div>
-                    <div class="number"><strong>44</strong></div>
+                    <div class="number">
+                    	<strong> 
+                    		<c:forEach var="dato" items="${datos}">
+									${dato.productosV}	
+							</c:forEach> 
+						</strong>
+                    </div>
                   </div>
                 </div>
                 <!-- Item -->
                 <div class="col-xl-3 col-sm-6">
                   <div class="item d-flex align-items-center">
                     <div class="icon bg-orange"><i class="icon-check"></i></div>
-                    <div class="title"><span>Open<br>Cases</span>
+                    <div class="title"><span>Ofertas<br>Disponibles</span>
                       <div class="progress">
                         <div role="progressbar" style="width: 25%; height: 4px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-orange"></div>
                       </div>
                     </div>
-                    <div class="number"><strong>35</strong></div>
+                    <div class="number">
+						<strong> 
+                    		<c:forEach var="dato" items="${datos}">
+									${dato.ofertas}	
+							</c:forEach> 
+						</strong>
+					</div>
                   </div>
                 </div>
               </div>
             </div>
           </section>
-	         
+          
+	         <!-- Polar Chart-->
+                <div class="col-lg-12 col-md-12">
+                  <div class="polar-chart-example card">
+                    <div class="card-close">
+                     
+                    </div>
+                    <div class="card-header d-flex align-items-center">
+                      <h3 class="h4">Ultimas actividades</h3>
+                    </div>
+                    <div class="card-body">
+                      <canvas id="polarChartExample"></canvas>
+                    </div>
+                  </div>
+                </div>
 	         
 	          	<%@ include file="/WEB-INF/views/shared/footer.jsp" %>
 	      </div>

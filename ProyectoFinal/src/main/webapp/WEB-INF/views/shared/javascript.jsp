@@ -4,6 +4,9 @@
     <script src="<c:url value="/resources/js/jquery.cookie.js" />"></script>
     <script src="<c:url value="/resources/js/jquery.validate.min.js" />"></script>
     <script src="<c:url value="/resources/js/front.js" />"></script>
+    <script src="<c:url value="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js" />"></script>
+    <script src="<c:url value="/resources/js/charts-home.js" />"></script>
+    <script src="<c:url value="/resources/js/charts-custom.js" />"></script>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID.-->
     <!---->
  	<script>

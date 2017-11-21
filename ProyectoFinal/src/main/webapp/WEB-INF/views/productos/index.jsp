@@ -4,6 +4,17 @@
 <head>
 	<%@ include file="/WEB-INF/views/shared/head.jsp" %>
 	<title>Lista de Productos</title>
+	<script>
+		function deleteProduct(id){
+		    var doIt=confirm('¿Estas seguro que deseas eliminarlo?');
+		  if(doIt){
+			location.href ="<%=request.getContextPath()%>/producto/"+id+"/borrar";
+		    }
+		  else{
+		
+		    }
+		}
+	</script>
 </head>
 <body>
 	<div class="page home-page">
@@ -59,17 +70,26 @@
                 <div class="col-lg-12">
                   <div class="card">
                     <div class="card-header d-flex align-items-center">
-                      	<h3 class="h4"></h3>
-                      	<form>
-							<input type="text" name="qa"/>
-							<input class="btn btn-outline-primary" type="submit" value="Buscar"/>
-						</form>
+                      	
+                      	<div style=" height: 60px" class="col text-left">
+	                      	<form class="form-inline">
+	                      		<div style="margin-right: 20px;" class="form-group">
+		                      		<div class="form-group-material">
+		                              <input id="qa" type="text" name="qa" class="input-material">
+		                              <label for="qa" class="label-material">¿Qué buscas?</label>
+		                            </div>
+	                      		</div>
+	                      		<div class="form-group">
+									<input class="btn btn-outline-primary" type="submit" value="Buscar"/>
+								</div>
+							</form>
+                      	</div>
 						<div class="col text-right">
 						<a href="<%=request.getContextPath()%>/producto/nuevo" class="btn bg-primary text-white">Nuevo Producto</a>
 						</div>
                     </div>
                     <div class="card-body">
-                      <table class="table table-striped table-hover">
+                      <table class="table table-responsive table-striped table-hover">
                         <thead>
                           <tr>
                             <th># Codigo</th>
@@ -103,14 +123,13 @@
 											<td>${producto.detalle}</td>
 											<td><a
 												href="<%=request.getContextPath()%>/producto/${producto.codigo_barras}/editar"
-												class="btnbtn-info btn-xs"> <i
-													class="fa fa-edit"></i>Editar
+												class="btn btn-outline-info btn-xs"> <i
+													class="fa fa-edit"></i> Editar
 											</a></td>
-												<td><a
-												href="<%=request.getContextPath()%>/producto/${producto.codigo_barras}/borrar"
-												class="btnbtn-danger btn-xs"> <i
-													class="fa fa-trash"></i> Eliminar
-											</a></td>
+												<td>
+													<input class="btn btn-outline-danger btn-xs" type="button" name="delete" value="Borrar" 
+													onclick="deleteProduct(${producto.codigo_barras});" >
+												</td>
 										</tr>
 									</c:forEach> 
 							    </c:if>

@@ -107,6 +107,25 @@ public class ProductoController {
 	    return "redirect:" + redirectUrl;
 	}
 	
+	  @GetMapping("/producto/{codigo_barras}/editar")
+		public ModelAndView form( @PathVariable String codigo_barras, ModelMap model) {
+		  ModelAndView modelAndView = null;
+		   ClientConfig clientConfig = new DefaultClientConfig();
+			clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING,Boolean.TRUE);
+			Client client = Client.create(clientConfig);
+			WebResource webResource = client.resource("https://fast-shop-jrgflores.c9users.io/productos/"+codigo_barras);
+			List<Producto> producto = webResource.get(new GenericType<List<Producto>>(){});
+			model.addAttribute("productos", producto);
+			try {
+				//Producto emp = employeeService.find(employee_id);
+				modelAndView = new ModelAndView("productos/editar", "productos", producto);
+			} catch (Exception e) {
+				model.addAttribute("message", e.getMessage());
+				modelAndView = new ModelAndView("productos/editar", "productos", new Producto());
+			}
+			return modelAndView;
+		}
+	  
 	  @RequestMapping(value= "/producto/{codigo_barras}/borrar", method = RequestMethod.GET)
 	    public String removeProducto(@PathVariable("codigo_barras") String codigo_barras){
 		  try {
@@ -120,58 +139,45 @@ public class ProductoController {
 	        }
 	        return "redirect:/productos";
 	    }
-
+	  
 	  //////////////////////////////////////////////////////////////////////////
-	
-	
-	  @GetMapping("/producto/{codigo_barras}/editar2")
-	    public String editarProducto(@PathVariable int codigo_barras, @RequestBody Producto productos) {
-	        
-	        try{
-	        /*	productos.remove(codigo_barras);
-	            productos.setCustId(codigo_barras);
-	            productos.put(codigo_barras, productos);*/
-	        }catch(Exception e){
-	            System.out.println(e.getStackTrace());
-	            return "producto";
-	        }
-	 
-	        // Log out custStores after PUT
-	        System.out.println("Customer Stores after PUT");
-	        //custStores.forEach((id, cust) -> System.out.println(cust.toString()));
-	 
-	        //return productos;
-	        return "producto/nuevo";
-	    }
 	  
-	
-	  
-	  @RequestMapping(value = "/producto/{codigo_barras}/editar3", method = RequestMethod.GET)
-	    public String updateProducto(@PathVariable("codigo_barras") String codigo_barras) {
-		  
-	        System.out.println("Updating User " + codigo_barras);
-	    
-	        return "productos/editar";
-	    }
-	  	
-	  @GetMapping("/producto/{codigo_barras}/editar")
-		public ModelAndView form( @PathVariable String codigo_barras, ModelMap model) {
-		  ModelAndView modelAndView = null;
-		   ClientConfig clientConfig = new DefaultClientConfig();
-			clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING,Boolean.TRUE);
-			Client client = Client.create(clientConfig);
-			WebResource webResource = client.resource("https://fast-shop-jrgflores.c9users.io/productos/"+codigo_barras);
-			List<Producto> producto = webResource.get(new GenericType<List<Producto>>(){});
-			
+	  @RequestMapping(value = "/producto/{codigo_barras}/actualizar", method = RequestMethod.POST)
+		public String ActualizarProducto(@ModelAttribute("productos") Producto p,@PathVariable("codigo_barras") String codigo_barras ) {	
 			try {
-				//Producto emp = employeeService.find(employee_id);
-				modelAndView = new ModelAndView("productos/editar", "producto", producto);
-			} catch (Exception e) {
-				model.addAttribute("message", e.getMessage());
-				modelAndView = new ModelAndView("productos/editar", "producto", new Producto());
-			}
+				Client client = Client.create();
+				WebResource webResource = client.resource("https://fast-shop-jrgflores.c9users.io/productos/"+codigo_barras);
+						
+				String codigo_barras2 = p.getCodigo_barras();
+				String nombre = p.getNombre();
+				double Dprecio =p.getPrecio();
+				double Dpeso = p.getPeso();
+				String precio = String.valueOf(Dprecio);
+				String peso = String.valueOf(Dpeso);
+				String categoria = p.getCategoria();
+				String detalle = p.getDetalle();
+				
+				String input = "{\"codigo_barras\": \""+codigo_barras2+"\", "
+		                + "\"nombre\":\""+nombre+"\", \"estado\":\"1\", "
+		                + "\"peso\":\""+peso+"\",\"precio\":\""+precio+"\",\"detalle\":\""+detalle+"\","
+		                + "\"categoria\":\""+categoria+"\"}";
+				ClientResponse response = webResource.accept("application/json").type("application/json")
+						   .put(ClientResponse.class, input);
+				if (response.getStatus() != 200) {
+					throw new RuntimeException("Failed : HTTP error code : "
+						+ response.getStatus());
+				}
+				System.out.println("Output from Server .... \n");
+				String output3 = response.getEntity(String.class);
+				System.out.println(output3);
+			  } catch (Exception e) {
 
-			return modelAndView;
+				e.printStackTrace();
+
+			  }
+			//redirect("/productos");
+			String redirectUrl = "/productos";
+		    return "redirect:" + redirectUrl;
 		}
 
 }
