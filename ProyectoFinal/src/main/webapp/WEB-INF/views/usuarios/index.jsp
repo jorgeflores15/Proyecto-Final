@@ -66,7 +66,7 @@
 						</form>
                     </div>
                     <div class="card-body">
-                      <table class="table table-striped table-hover">
+                      <table class="table table-responsive table-striped table-hover">
                         <thead>
                           <tr>
                             <th>Id</th>
@@ -85,21 +85,25 @@
 											<td>${usuario.nombres}</td>
 											<td>${usuario.avatar}</td>
 											<td>${usuario.correo}</td>
-											<%-- <td><a
-												href="<%=request.getContextPath()%>/usuario/${usuario.id_usuario}/editar"
-												class="btnbtn-info btn-xs"> <i
-													class="fa fa-edit"></i>Edit
-											</a></td>--%>
-												<td><a href="#"
+											<td><a href="#"
 												<%--  href="<%=request.getContextPath()%>/usuario/${usuario.id_usuario}/historial/"--%>
 												class="btnbtn-danger btn-xs" data-toggle="modal" data-target="#myModal"> <i
 													class="fa fa-list"></i> Consultar historial
-											</a></td>
+												</a>
+											</td>
+											<td>
+												<!-- <a href="#"onclick="consultarFacturas()">Consultate :v</a> -->
+												<form action="historial" id="searchForm">
+												  <input type="text" value="${usuario.id_usuario}" name="s" style="visibility:hidden">
+												  <input type="submit" value="Consultar">
+												</form>
+											</td>
 										</tr>
 									</c:forEach> 
 							    </c:if>
 						</tbody>
 					</table>
+					<div id="result"></div>
 					 <c:if test="${empty usuarios}">
 						<div style="margin:30px;margin-bottom:126px">No hay usuarios ...</div>
 					 </c:if>
@@ -138,5 +142,41 @@
    	  </div>
    	  <%@ include file="/WEB-INF/views/shared/javascript.jsp" %>
    </div>
+   <script type="text/javascript">
+   $( "#searchForm2" ).submit(function( event ) {
+	   event.preventDefault();
+	   consultarFacturas();
+	   <!--
+	   // Get some values from elements on the page: 
+	   var $form = $( this ),
+	     term = $form.find( "input[name='s']" ).val(),
+	     url = $form.attr( "action" );
+	   // Send the data using post
+	   ///url="http://localhost:8080/proyecto/facturas/1000";
+	   var posting = $.post( url, { s: term } );
+	  	console.log(url);
+	  
+	   // Put the results in a div
+	   posting.done(function( data ) {
+	     var content = $( data ).find( "#content" );
+	     $( "#result" ).empty().append( content );
+	   });-->
+	   
+	 });
+   $(document).ready(function(){
+	    $("#searchForm").click(function(){
+	        $.get("http://localhost:8080/proyecto/facturas?s=1000", function(data, status){
+	            alert("Data: " + data + "\nStatus: " + status);
+	        });
+	    });
+	});
+   <!--
+	 function consultarFacturas(){
+	  $.post( "http://localhost:8080/proyecto/facturas?s=1000", function( data ) {
+		   alert( "Data Loaded: " + data );
+		   console.log(data);
+		 });-->
+	 
+   </script>
 </body>
 </html>

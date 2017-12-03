@@ -4,12 +4,9 @@ public class Usuario {
 
 	private String id_usuario;
 	private String nombres;
-	private String avatar;
 	private String correo;
-	private String rol;
-	private String usuario;
-	private String password;
-	
+	private String avatar;
+	private int estado;
 	
 	public String getId_usuario() {
 		return id_usuario;
@@ -23,54 +20,39 @@ public class Usuario {
 	public void setNombres(String nombres) {
 		this.nombres = nombres;
 	}
-	public String getAvatar() {
-		return avatar;
-	}
-	public void setAvatar(String avatar) {
-		this.avatar = avatar;
-	}
 	public String getCorreo() {
 		return correo;
 	}
 	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
-
-	public Usuario() {
-		super();
+	public String getAvatar() {
+		return avatar;
 	}
-	public String getRol() {
-		return rol;
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
-	public void setRol(String rol) {
-		this.rol = rol;
+	public int getEstado() {
+		return estado;
 	}
-	public String getUsuario() {
-		return usuario;
+	public void setEstado(int estado) {
+		this.estado = estado;
 	}
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public Usuario(String id_usuario, String nombres, String avatar, String correo, String rol, String usuario,
-			String password) {
+	public Usuario(String id_usuario, String nombres, String correo, String avatar, int estado) {
 		super();
 		this.id_usuario = id_usuario;
 		this.nombres = nombres;
-		this.avatar = avatar;
 		this.correo = correo;
-		this.rol = rol;
-		this.usuario = usuario;
-		this.password = password;
+		this.avatar = avatar;
+		this.estado = estado;
+	}
+	public Usuario() {
+		super();
 	}
 	@Override
 	public String toString() {
-		return "Usuario [id_usuario=" + id_usuario + ", nombres=" + nombres + ", avatar=" + avatar + ", correo="
-				+ correo + ", rol=" + rol + ", usuario=" + usuario + ", password=" + password + "]";
+		return "Usuario [id_usuario=" + id_usuario + ", nombres=" + nombres + ", correo=" + correo + ", avatar="
+				+ avatar + ", estado=" + estado + "]";
 	}
+	
 }

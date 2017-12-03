@@ -98,6 +98,7 @@
                             <th>Precio</th>
                             <th>Peso</th>
                             <th>Estado</th>
+                            <th>Oferta</th>
                             <th>Detalle</th>
                             <th></th>
                             <th></th>
@@ -120,11 +121,18 @@
 											        <td>Vendido</td>
 											    </c:otherwise>
 											</c:choose>
+											<c:choose>
+											    <c:when test="${producto.oferta eq '1'}">
+											       <td>En Oferta</td>
+											    </c:when>    
+											    <c:otherwise>
+											        <td>Nelson</td>
+											    </c:otherwise>
+											</c:choose>
 											<td>${producto.detalle}</td>
 											<td><a
 												href="<%=request.getContextPath()%>/producto/${producto.codigo_barras}/editar"
-												class="btn btn-outline-info btn-xs"> <i
-													class="fa fa-edit"></i> Editar
+												class="btn btn-outline-info btn-xs"> <i	class="fa fa-edit"></i> Editar
 											</a></td>
 												<td>
 													<input class="btn btn-outline-danger btn-xs" type="button" name="delete" value="Borrar" 

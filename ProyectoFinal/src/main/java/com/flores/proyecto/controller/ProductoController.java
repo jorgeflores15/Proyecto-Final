@@ -8,11 +8,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.flores.proyecto.model.Producto;
@@ -39,7 +37,6 @@ public class ProductoController {
 			WebResource webResource = client.resource("https://fast-shop-jrgflores.c9users.io/productos");
 			List<Producto> producto = webResource.get(new GenericType<List<Producto>>(){});
 			model.addAttribute("productos", producto);
-			//System.out.println(producto);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e);
@@ -81,7 +78,8 @@ public class ProductoController {
 			double Dpeso = p.getPeso();
 			String precio = String.valueOf(Dprecio);
 			String peso = String.valueOf(Dpeso);
-			String categoria = p.getCategoria();
+			String categoria = "1";
+			//String categoria = p.getCategoria();
 			String detalle = p.getDetalle();
 			
 			String input = "{\"codigo_barras\": \""+codigo_barras+"\", "
@@ -154,7 +152,8 @@ public class ProductoController {
 				double Dpeso = p.getPeso();
 				String precio = String.valueOf(Dprecio);
 				String peso = String.valueOf(Dpeso);
-				String categoria = p.getCategoria();
+				//String categoria = p.getCategoria();
+				String categoria = "1";
 				String detalle = p.getDetalle();
 				
 				String input = "{\"codigo_barras\": \""+codigo_barras2+"\", "
